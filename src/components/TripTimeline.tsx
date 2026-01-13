@@ -15,14 +15,14 @@ interface TripTimelineProps {
 const tripColors: Record<TripType, string> = {
   RIH: 'bg-trip-rih',
   POOH: 'bg-trip-pooh',
-  Drilling: 'bg-trip-drilling',
+  NoPipe: 'bg-muted',
   Other: 'bg-trip-other',
 };
 
 const tripBorderColors: Record<TripType, string> = {
   RIH: 'border-trip-rih/50',
   POOH: 'border-trip-pooh/50',
-  Drilling: 'border-trip-drilling/50',
+  NoPipe: 'border-muted-foreground/50',
   Other: 'border-trip-other/50',
 };
 

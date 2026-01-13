@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
 import Header from '@/components/Header';
 import TimeWindowSelector from '@/components/TimeWindowSelector';
-import AnalysisView from '@/components/AnalysisView';
+import LabelingWorkspace from '@/components/labeling/LabelingWorkspace';
 import { PipeTrip, SensorDataPoint } from '@/types/trip';
 import { generateMockSensorData, generateMockTrips } from '@/utils/mockData';
 
-type ViewMode = 'selection' | 'analysis';
+type ViewMode = 'selection' | 'labeling';
 
 const Index = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('selection');
@@ -21,7 +21,7 @@ const Index = () => {
     setSensorData(mockSensorData);
     setTrips(mockTrips);
     setDateRange({ start: startDate, end: endDate });
-    setViewMode('analysis');
+    setViewMode('labeling');
   }, []);
 
   const handleBack = useCallback(() => {
@@ -40,8 +40,8 @@ const Index = () => {
         <TimeWindowSelector onRunAnalysis={handleRunAnalysis} />
       )}
       
-      {viewMode === 'analysis' && dateRange && (
-        <AnalysisView
+      {viewMode === 'labeling' && dateRange && (
+        <LabelingWorkspace
           trips={trips}
           sensorData={sensorData}
           startDate={dateRange.start}
