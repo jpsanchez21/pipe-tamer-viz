@@ -16,7 +16,7 @@ interface TripEditPanelProps {
   onReset: (tripId: string) => void;
 }
 
-const tripTypes: TripType[] = ['RIH', 'POOH', 'Drilling', 'Other'];
+const tripTypes: TripType[] = ['RIH', 'POOH', 'NoPipe', 'Other'];
 
 const TripEditPanel = ({ trip, onClose, onUpdate, onReset }: TripEditPanelProps) => {
   const [name, setName] = useState(trip.name);

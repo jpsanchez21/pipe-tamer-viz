@@ -1,4 +1,4 @@
-import { PipeTrip, SensorDataPoint, TripType } from '@/types/trip';
+import { PipeTrip, SensorDataPoint, TripType, PipeType } from '@/types/trip';
 
 export const generateMockSensorData = (startDate: Date, endDate: Date): SensorDataPoint[] => {
   const data: SensorDataPoint[] = [];
@@ -31,15 +31,16 @@ export const generateMockSensorData = (startDate: Date, endDate: Date): SensorDa
 };
 
 export const generateMockTrips = (startDate: Date, endDate: Date): PipeTrip[] => {
-  const tripTypes: TripType[] = ['RIH', 'POOH', 'Drilling', 'Other'];
+  const tripTypes: TripType[] = ['RIH', 'POOH', 'NoPipe', 'Other'];
+  const pipeTypes: PipeType[] = ['Drill Pipe', 'Casing', 'Tubing', 'BHA', 'Other'];
   const tripNames = [
     'Trip to Casing Point',
     'Pull Out for Bit Change',
     'Run In with New BHA',
     'Short Trip for Tight Hole',
     'Wiper Trip',
-    'Circulation at Bottom'
   ];
+  const tubingRefs = ['DP-5.5"', 'CSG-9.625"', 'TBG-4.5"', 'BHA-8.5"', 'DP-6.625"'];
 
   const duration = endDate.getTime() - startDate.getTime();
   const numTrips = 5;
@@ -54,6 +55,8 @@ export const generateMockTrips = (startDate: Date, endDate: Date): PipeTrip[] =>
       id: `trip-${i + 1}`,
       name: tripNames[i % tripNames.length],
       type: tripTypes[i % tripTypes.length],
+      pipeType: pipeTypes[i % pipeTypes.length],
+      tubingReference: tubingRefs[i % tubingRefs.length],
       startTime: tripStart,
       endTime: tripEnd,
       status: i === 2 ? 'modified' : i === 4 ? 'validated' : 'auto',
