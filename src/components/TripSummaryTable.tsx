@@ -56,7 +56,6 @@ const TripSummaryTable = ({ trips, selectedTripId, onSelectTrip }: TripSummaryTa
                     "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium",
                     trip.type === 'RIH' && "bg-trip-rih/20 text-trip-rih",
                     trip.type === 'POOH' && "bg-trip-pooh/20 text-trip-pooh",
-                    trip.type === 'NoPipe' && "bg-muted text-muted-foreground",
                     trip.type === 'Other' && "bg-trip-other/20 text-trip-other"
                   )}>
                     {trip.type}

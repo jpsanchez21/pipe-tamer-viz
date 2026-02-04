@@ -15,24 +15,22 @@ interface TripTimelineProps {
 const tripColors: Record<TripType, string> = {
   RIH: 'bg-trip-rih',
   POOH: 'bg-trip-pooh',
-  NoPipe: 'bg-muted',
   Other: 'bg-trip-other',
 };
 
 const tripBorderColors: Record<TripType, string> = {
   RIH: 'border-trip-rih/50',
   POOH: 'border-trip-pooh/50',
-  NoPipe: 'border-muted-foreground/50',
   Other: 'border-trip-other/50',
 };
 
-const TripTimeline = ({ 
-  trips, 
-  startDate, 
-  endDate, 
-  selectedTripId, 
+const TripTimeline = ({
+  trips,
+  startDate,
+  endDate,
+  selectedTripId,
   onSelectTrip,
-  onUpdateTrip 
+  onUpdateTrip
 }: TripTimelineProps) => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState<{ tripId: string; edge: 'start' | 'end' } | null>(null);
@@ -88,7 +86,7 @@ const TripTimeline = ({
   };
 
   return (
-    <div 
+    <div
       className="relative"
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
@@ -97,7 +95,7 @@ const TripTimeline = ({
       {/* Time axis */}
       <div className="flex justify-between mb-2 px-1">
         {timeMarkers.map((marker, index) => (
-          <span 
+          <span
             key={index}
             className="text-xs font-mono text-muted-foreground"
             style={{ position: 'absolute', left: `${marker.position}%`, transform: 'translateX(-50%)' }}
@@ -108,7 +106,7 @@ const TripTimeline = ({
       </div>
 
       {/* Timeline track */}
-      <div 
+      <div
         ref={timelineRef}
         className="relative h-20 mt-8 bg-muted/30 rounded-lg border border-border/30 overflow-hidden"
       >

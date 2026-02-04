@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+# Pipe Tamer Viz
 
-## Project info
+## Project Overview
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Pipe Tamer Viz** is a modern pipeline visualization platform built with React, Vite, and TypeScript.
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## Technology Stack
 
 This project is built with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite** - Fast build tool and dev server
+- **TypeScript** - Type-safe JavaScript
+- **React** - UI library
+- **shadcn/ui** - Component library
+- **Tailwind CSS** - Utility-first CSS framework
 
-## How can I deploy this project?
+## Development Setup
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Prerequisites
 
-## Can I connect a custom domain to my Lovable project?
+- Node.js (LTS version recommended)
+- npm or yarn package manager
 
-Yes, you can!
+### Installation
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```sh
+# Clone the repository
+git clone <YOUR_GIT_URL>
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+# Navigate to the project directory
+cd pipe-tamer-viz
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The application will be available at `http://localhost:8080`
+
+## Available Scripts
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Build for development mode
+npm run build:dev
+
+# Preview production build
+npm run preview
+
+# Run linter
+npm run lint
+
+# Run tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+## Project Structure
+
+```
+pipe-tamer-viz/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility libraries
+│   ├── types/          # TypeScript type definitions
+│   ├── utils/          # Helper functions
+│   └── main.tsx        # Application entry point
+├── public/             # Static assets
+└── index.html          # HTML template
+```
+
+## Contributing
+
+Contributions are welcome! Please ensure your code follows the project's coding standards and passes all tests.
+
+## License
+
+All rights reserved - JP SKH

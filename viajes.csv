@@ -1,0 +1,5 @@
+deviceId;pozo;fin;inicio;tipo;actividad;tipo_tuberia;tipo llave;dh_tool_family
+ColpetroleumRsu8;MN-48;2025-12-06 05:15:36;2025-12-05 17:08:15;POOH;POOH ESP#9 PMM;TUBING 2 3/8 4,7 N-80 EUE;Llave Hidráulica;Artificial Lift
+ColpetroleumRsu8;MN-48;2025-12-08 04:21:38;2025-12-07 13:23:18;RIH;RIH BHA#1 LIMPIEZA_ARENA;DRILL PIPE 2 3/8 6,65 S135 NC26;Llave Hidráulica;Debris Removal
+ColpetroleumRsu8;MN-48;2025-12-09 16:56:31;2025-12-09 05:10:43;POOH;POOH BHA#1 LIMPIEZA_ARENA;DRILL PIPE 2 3/8 6,65 S135 NC26;Llave Hidráulica;Debris Removal
+ColpetroleumRsu8;MN-48;2025-12-14 20:48:17;2025-12-13 03:02:51;RIH;RIH ESP#10 PMM;TUBING 2 3/8 4,7 N-80 EUE;Llave Hidráulica;Artificial Lift
