@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { X, RotateCcw, Save, CheckCircle, Tag, Clock, MessageSquare, Wrench, Trash2, Activity } from 'lucide-react';
+import { X, RotateCcw, Save, CheckCircle, Tag, Clock, MessageSquare, Wrench, Trash2, Activity, ChevronsUpDown, Check } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { PipeTrip, TripType, PipeType, DHToolFamily, KeyType } from '@/types/trip';
 import { formatDuration } from '@/utils/mockData';
 import { cn } from '@/lib/utils';
@@ -50,6 +52,7 @@ const IntervalEditor = ({ trip, onClose, onUpdate, onReset, onDelete, pressureDa
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [comments, setComments] = useState('');
+  const [pipeSpecOpen, setPipeSpecOpen] = useState(false); // Control popover state
 
   // Initial load of trip data
   useEffect(() => {
@@ -275,37 +278,87 @@ const IntervalEditor = ({ trip, onClose, onUpdate, onReset, onDelete, pressureDa
         {/* TRIP-SPECIFIC FIELDS (Only for RIH, POOH, Other - NOT for PP) */}
         {!isPressureTest && (
           <>
-            {/* 5. Pipe Type */}
+            {/* 5. Pipe Type with Search */}
             <div className="space-y-1.5">
               <Label className="text-xs font-medium uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                 <Wrench className="w-3 h-3" />
                 Especificación de Tubería
               </Label>
-              <Select
-                value={tubingReference}
-                onValueChange={(val) => {
-                  const spec = pipeSpecs.find(p => p.name === val);
-                  if (spec) {
-                    setTubingReference(val);
-                    setPipeType(spec.type); // Auto-update generic type based on spec
-                    syncChanges({ tubingReference: val, pipeType: spec.type });
-                  }
-                }}
-              >
-                <SelectTrigger className="industrial-input h-9 text-xs">
-                  <SelectValue placeholder="Seleccionar especificación..." />
-                </SelectTrigger>
-                <SelectContent className="max-h-[300px]">
-                  <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted/30">TUBING</div>
-                  {pipeSpecs.filter(p => p.type === 'Tubing').map((p) => (
-                    <SelectItem key={p.id} value={p.name} className="text-xs">{p.name}</SelectItem>
-                  ))}
-                  <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground bg-muted/30 border-t border-border/20 mt-1">DRILL PIPE</div>
-                  {pipeSpecs.filter(p => p.type === 'Drill Pipe').map((p) => (
-                    <SelectItem key={p.id} value={p.name} className="text-xs">{p.name}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover open={pipeSpecOpen} onOpenChange={setPipeSpecOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className={cn(
+                      "industrial-input h-9 w-full justify-between text-xs font-normal",
+                      !tubingReference && "text-muted-foreground"
+                    )}
+                  >
+                    {tubingReference || "Seleccionar especificación..."}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[300px] p-0" align="start">
+                  <Command>
+                    <CommandInput placeholder="Buscar especificación..." className="h-9" />
+                    <CommandEmpty>No se encontró especificación.</CommandEmpty>
+                    <div className="max-h-[300px] overflow-y-auto">
+                      <CommandGroup heading="TUBING">
+                        {pipeSpecs.filter(p => p.type === 'Tubing').map((p) => (
+                          <CommandItem
+                            key={p.id}
+                            value={p.name}
+                            onSelect={(currentValue) => {
+                              const spec = pipeSpecs.find(s => s.name === currentValue);
+                              if (spec) {
+                                setTubingReference(currentValue);
+                                setPipeType(spec.type);
+                                syncChanges({ tubingReference: currentValue, pipeType: spec.type });
+                                setPipeSpecOpen(false); // Close popover after selection
+                              }
+                            }}
+                            className="text-xs"
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-3 w-3",
+                                tubingReference === p.name ? "opacity-100" : "opacity-0"
+                              )}
+                            />
+                            {p.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                      <CommandGroup heading="DRILL PIPE">
+                        {pipeSpecs.filter(p => p.type === 'Drill Pipe').map((p) => (
+                          <CommandItem
+                            key={p.id}
+                            value={p.name}
+                            onSelect={(currentValue) => {
+                              const spec = pipeSpecs.find(s => s.name === currentValue);
+                              if (spec) {
+                                setTubingReference(currentValue);
+                                setPipeType(spec.type);
+                                syncChanges({ tubingReference: currentValue, pipeType: spec.type });
+                                setPipeSpecOpen(false); // Close popover after selection
+                              }
+                            }}
+                            className="text-xs"
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-3 w-3",
+                                tubingReference === p.name ? "opacity-100" : "opacity-0"
+                              )}
+                            />
+                            {p.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </div>
+                  </Command>
+                </PopoverContent>
+              </Popover>
             </div>
 
             {/* 6. Key Type */}
