@@ -30,7 +30,6 @@ const IntervalSummaryTable = ({ trips, connections = [], selectedTripId, onSelec
   const renderHeaders = () => {
     switch (activeTab) {
       case 'pressureTests':
-      case 'pressureTests':
         return (
           <>
             <th className="text-center p-2.5 text-[10px] font-black uppercase tracking-widest text-muted-foreground border-b border-border/30">#</th>
